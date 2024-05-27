@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #aed9e0; /* Pastel blue background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .animated-text {
+            color: #333;
+            font-size: 20px;
+            text-align: center;
+            animation: slide-in 2s ease infinite;
+            position: absolute;
+            top: 20px; /* Adjusted top position */
+        }
+
+        @keyframes slide-in {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #container {
+            max-width: 800px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 5px;
+            color: #333;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #csvData {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-top: 20px;
+            border: 2px solid #333; /* Dark grey border */
+        }
+
+        th, td {
+            border: 1px solid #333; /* Dark grey border */
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="animated-text">Check your attendance below</div>
+    <div id="container">
+        <h1>Attendance Checker</h1>
+        <button onclick="loadCSV()">Attendance</button>
+        <div id="csvData"></div>
+    </div>
+    <script>
+        function loadCSV() {
+            // Specify the path to your CSV file
+            const csvFilePath = 'attendance.csv';
+
+            // Use fetch to read the contents of the CSV file
+            fetch(csvFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(data => displayCSV(data))
+                .catch(error => {
+                    console.error('Error reading CSV file:', error);
+                    alert('Error reading CSV file. Please check the console for details.');
+                });
+        }
+
+        function displayCSV(data) {
+    // Display the CSV data in a table within a div element
+    var csvDataDiv = document.getElementById('csvData');
+    
+    // Split the CSV data into rows
+    var rows = data.split('\n');
+    
+    // Create a table element
+    var table = document.createElement('table');
+
+    // Loop through each row and create table cells
+    for (var i = 0; i < rows.length; i++) {
+        var row = table.insertRow(-1);
+        var cells = rows[i].split(',');
+
+        for (var j = 0; j < cells.length; j++) {
+            var cell = row.insertCell(-1);
+            cell.innerHTML = cells[j];
+        }
+    }
+
+    // Append the table to the div
+    csvDataDiv.innerHTML = '';
+    csvDataDiv.appendChild(table);
+}
+
+    </script>
+
+    
+</body>
+</html>
