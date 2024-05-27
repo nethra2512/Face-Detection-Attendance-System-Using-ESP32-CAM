@@ -6,8 +6,8 @@ import os
 from datetime import datetime
 import face_recognition
  
-path = r'C:\Users\Vijaya Prasanna\Desktop\iot\image_att'
-url='http://192.168.52.55/cam-hi.jpg'
+path = #yourpathtocsv
+url='http://192.168.52.55/cam-hi.jpg' ## replace with your actual ESP32 cam webserver URL ##
 ##'''cam.bmp / cam-lo.jpg /cam-hi.jpg / cam.mjpeg '''
  
 
