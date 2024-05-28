@@ -11,8 +11,7 @@ This project demonstrates how to set up an ESP32-CAM module as a web server for 
 - [Setup](#setup)
 - [Usage](#usage)
 - [Endpoints](#endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Introduction
 
